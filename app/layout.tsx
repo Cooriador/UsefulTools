@@ -1,6 +1,7 @@
 // app/layout.tsx
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
+import Link from 'next/link'
 import './globals.css'
 import Script from 'next/script'
 
@@ -19,24 +20,22 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <head>
+      <body className={inter.className}>
         <Script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-      </head>
-      <body className={inter.className}>
         <header className="border-b bg-white">
           <div className="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
-            <a href="/" className="text-xl font-bold text-blue-700">
+            <Link href="/" className="text-xl font-bold text-blue-700">
               Inflation Calculator
-            </a>
+            </Link>
             <nav className="text-sm text-gray-500">
-              <a href="/about" className="hover:underline">
+              <Link href="/about" className="hover:underline">
                 About
-              </a>
+              </Link>
             </nav>
           </div>
         </header>
@@ -48,9 +47,9 @@ export default function RootLayout({
               Updated annually.
             </p>
             <p className="mt-1">
-              <a href="/about" className="underline">
+              <Link href="/about" className="underline">
                 About this tool
-              </a>
+              </Link>
             </p>
           </div>
         </footer>
