@@ -60,7 +60,7 @@ export default function Calculator({
             type="number"
             min={1}
             value={amount}
-            onChange={(e) => setAmount(Math.max(1, Number(e.target.value)))}
+            onChange={(e) => setAmount(Math.max(1, Number(e.target.value) || 1))}
             className="border rounded px-3 py-2 w-36 text-right"
           />
         </div>

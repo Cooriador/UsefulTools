@@ -41,6 +41,9 @@ export async function generateMetadata({
   return {
     title: `Inflation ${fromYear} to ${toYear}: ${formatPercent(result.cumulativePercent)} | Inflation Calculator`,
     description: `US inflation from ${fromYear} to ${toYear} was ${formatPercent(result.cumulativePercent)}. $100 in ${fromYear} had the same purchasing power as ${formatCurrency(result.adjustedAmount)} in ${toYear}.`,
+    alternates: {
+      canonical: `${process.env.SITE_URL || 'https://your-domain.com'}/inflation-from/${from}/${to}`,
+    },
   }
 }
 

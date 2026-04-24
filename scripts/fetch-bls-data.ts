@@ -31,15 +31,8 @@ async function main() {
   }
 
   const cpi: Record<string, number> = {}
-  const allYears = new Set([...Object.keys(m13), ...Object.keys(monthly)])
-  for (const year of allYears) {
-    if (m13[year] !== undefined) {
-      cpi[year] = Math.round(m13[year] * 100) / 100
-    } else if (monthly[year]?.length) {
-      const avg =
-        monthly[year].reduce((a, b) => a + b, 0) / monthly[year].length
-      cpi[year] = Math.round(avg * 100) / 100
-    }
+  for (const [year, value] of Object.entries(m13)) {
+    cpi[year] = Math.round(value * 100) / 100
   }
 
   const sorted = Object.fromEntries(

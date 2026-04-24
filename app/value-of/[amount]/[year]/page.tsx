@@ -46,6 +46,9 @@ export async function generateMetadata({
   return {
     title: `${original} in ${fromYear} → ${adjusted} in ${MAX_YEAR} | Inflation Calculator`,
     description: `${original} in ${fromYear} had the same purchasing power as ${adjusted} in ${MAX_YEAR} (${formatPercent(result.cumulativePercent)} cumulative inflation). Calculated using CPI-U data from the Bureau of Labor Statistics.`,
+    alternates: {
+      canonical: `${process.env.SITE_URL || 'https://your-domain.com'}/value-of/${amountStr}/${yearStr}`,
+    },
   }
 }
 
