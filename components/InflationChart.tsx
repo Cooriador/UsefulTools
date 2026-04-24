@@ -28,7 +28,7 @@ export default function InflationChart({ data }: Props) {
           tick={{ fontSize: 12 }}
         />
         <Tooltip
-          formatter={(v: number) => [formatCurrency(v), 'Value']}
+          formatter={(v) => [formatCurrency(Number(v ?? 0)), 'Value']}
           labelFormatter={(l) => `Year: ${l}`}
         />
         <Line

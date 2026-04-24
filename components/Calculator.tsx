@@ -32,7 +32,7 @@ export default function Calculator({
   const maxYear = years[years.length - 1]
 
   const [amount, setAmount] = useState(defaultAmount)
-  const [fromYear, setFromYear] = useState(defaultFromYear ?? 1950)
+  const [fromYear, setFromYear] = useState(defaultFromYear ?? years[0])
   const [toYear, setToYear] = useState(defaultToYear ?? maxYear)
 
   const result = useMemo(
