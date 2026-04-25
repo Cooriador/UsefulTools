@@ -19,9 +19,9 @@ export function calculateInflation(
   const toCPI = cpi[String(toYear)]
   const adjustedAmount = amount * (toCPI / fromCPI)
   const cumulativePercent = ((toCPI - fromCPI) / fromCPI) * 100
-  const years = toYear - fromYear
+  const yearSpan = Math.abs(toYear - fromYear)
   const avgAnnualRate =
-    years > 0 ? (Math.pow(toCPI / fromCPI, 1 / years) - 1) * 100 : 0
+    yearSpan > 0 ? (Math.pow(toCPI / fromCPI, 1 / yearSpan) - 1) * 100 : 0
   return { adjustedAmount, cumulativePercent, avgAnnualRate }
 }
 
@@ -32,9 +32,11 @@ export function getChartData(
   cpi: CPIData
 ): Array<{ year: number; value: number }> {
   const fromCPI = cpi[String(fromYear)]
+  const minYear = Math.min(fromYear, toYear)
+  const maxYear = Math.max(fromYear, toYear)
   return Object.keys(cpi)
     .map(Number)
-    .filter((y) => y >= fromYear && y <= toYear)
+    .filter((y) => y >= minYear && y <= maxYear)
     .sort((a, b) => a - b)
     .map((year) => ({
       year,

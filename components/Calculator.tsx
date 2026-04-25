@@ -78,7 +78,7 @@ export default function Calculator({
             className="border rounded px-3 py-2"
           >
             {years
-              .filter((y) => y < toYear)
+              .filter((y) => y !== toYear)
               .map((y) => (
                 <option key={y} value={y}>
                   {y}
@@ -100,7 +100,7 @@ export default function Calculator({
             className="border rounded px-3 py-2"
           >
             {years
-              .filter((y) => y > fromYear)
+              .filter((y) => y !== fromYear)
               .map((y) => (
                 <option key={y} value={y}>
                   {y}

@@ -39,6 +39,16 @@ describe('calculateInflation', () => {
     expect(result.avgAnnualRate).toBe(0)
   })
 
+  it('calculates correctly when toYear is earlier than fromYear', () => {
+    const { adjustedAmount, cumulativePercent, avgAnnualRate } =
+      calculateInflation(100, 2024, 1950, mockCPI)
+    expect(adjustedAmount).toBeCloseTo(100 * (24.1 / 314.0), 2)
+    expect(cumulativePercent).toBeCloseTo(((24.1 - 314.0) / 314.0) * 100, 1)
+    // same annual rate magnitude as forward, but negative
+    const expected = (Math.pow(24.1 / 314.0, 1 / 74) - 1) * 100
+    expect(avgAnnualRate).toBeCloseTo(expected, 2)
+  })
+
   it('scales linearly with input amount', () => {
     const r1 = calculateInflation(100, 1950, 2024, mockCPI)
     const r2 = calculateInflation(200, 1950, 2024, mockCPI)
