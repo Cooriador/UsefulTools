@@ -138,15 +138,24 @@ export default function Calculator({
 
       <div className="grid grid-cols-3 gap-4 text-sm">
         {BENCHMARKS.map((b) => {
-          const qty = result.adjustedAmount / b.price2024
+          const cpiRef = cpi['2024']
+          const fmt = (n: number) => (n >= 0.1 ? n.toFixed(1) : n.toFixed(2))
+          const fromQty = (amount * cpiRef) / (b.price2024 * cpi[String(fromYear)])
+          const toQty = (amount * cpiRef) / (b.price2024 * cpi[String(toYear)])
           return (
             <div key={b.label} className="bg-gray-50 rounded p-3">
-              <p className="text-gray-500 text-xs mb-1">{b.label}</p>
-              <p className="font-medium">
-                {qty >= 1
-                  ? qty.toFixed(1)
-                  : `${(qty * 100).toFixed(0)}%`}{' '}
-                {b.unit}
+              <p className="text-gray-500 text-xs mb-2">{b.label}</p>
+              <p className="text-gray-700">
+                {fromYear}:{' '}
+                <span className="font-medium">
+                  {fmt(fromQty)} {b.unit}
+                </span>
+              </p>
+              <p className="text-blue-700">
+                {toYear}:{' '}
+                <span className="font-medium">
+                  {fmt(toQty)} {b.unit}
+                </span>
               </p>
             </div>
           )
