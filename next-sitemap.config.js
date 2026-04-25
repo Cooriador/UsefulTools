@@ -1,7 +1,7 @@
 // next-sitemap.config.js
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: process.env.SITE_URL || 'https://your-domain.com',
+  siteUrl: 'https://curiocalc.com',
   generateRobotsTxt: true,
   changefreq: 'yearly',
   priority: 0.7,
