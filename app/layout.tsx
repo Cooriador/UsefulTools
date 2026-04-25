@@ -23,7 +23,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3888875177929563"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
