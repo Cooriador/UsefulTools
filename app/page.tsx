@@ -2,6 +2,7 @@
 import type { Metadata } from 'next'
 import cpiData from '../data/cpi.json'
 import Calculator from '../components/Calculator'
+import HomepageContent from '../components/HomepageContent'
 import type { CPIData } from '../lib/inflation'
 
 const cpi = cpiData as CPIData
@@ -28,6 +29,7 @@ export default function Home() {
         defaultFromYear={1950}
         defaultToYear={maxYear}
       />
+      <HomepageContent />
     </div>
   )
 }
