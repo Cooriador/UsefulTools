@@ -5,7 +5,7 @@ export interface Era {
   blurb: string
 }
 
-// Decade blurbs keyed by decade start year (1910–2020)
+// Keyed by decade start year; 2020 key covers 2020–2029
 const DECADES: Record<number, string> = {
   1910: `The 1910s were shaped by the establishment of the Federal Reserve in 1913, which gave the US a central bank to manage monetary policy. World War I drove massive government spending and wartime inflation. Consumer prices roughly doubled between 1914 and 1920 as demand surged and supply chains strained under the pressures of global conflict and industrial mobilization.`,
 
@@ -109,7 +109,10 @@ export const ERAS: Era[] = [
 
 /**
  * Returns the decade blurb for the given year.
- * Falls back to the 1910s blurb if the decade isn't found.
+ *
+ * Valid input range: 1913–present (years from the CPI dataset).
+ * Years before 1910 or after 2029 have no dedicated entry and fall back to
+ * the 1910s blurb; callers should only pass years within the CPI dataset range.
  */
 export function getDecadeBlurb(year: number): string {
   const decadeStart = Math.floor(year / 10) * 10
@@ -119,6 +122,10 @@ export function getDecadeBlurb(year: number): string {
 /**
  * Returns the era blurb for the given year.
  * Uses startYear <= year < endYear semantics.
+ *
+ * Valid input range: 1913–present (years from the CPI dataset).
+ * Years outside any era (e.g. before 1913) fall back to the first era's blurb;
+ * callers should only pass years within the CPI dataset range.
  */
 export function getEraBlurb(year: number): string {
   const era = ERAS.find((e) => e.startYear <= year && year < e.endYear)
@@ -128,6 +135,10 @@ export function getEraBlurb(year: number): string {
 /**
  * Returns the era name for the given year.
  * Uses startYear <= year < endYear semantics.
+ *
+ * Valid input range: 1913–present (years from the CPI dataset).
+ * Years outside any era (e.g. before 1913) fall back to the first era's name;
+ * callers should only pass years within the CPI dataset range.
  */
 export function getEraName(year: number): string {
   const era = ERAS.find((e) => e.startYear <= year && year < e.endYear)
@@ -136,7 +147,13 @@ export function getEraName(year: number): string {
 
 /**
  * Returns all eras that overlap with the given year range [fromYear, toYear].
- * An era overlaps if era.endYear > fromYear && era.startYear <= toYear.
+ *
+ * Boundary semantics: `fromYear` is exclusive and `toYear` is inclusive in the
+ * overlap test (`era.endYear > fromYear && era.startYear <= toYear`).  An era
+ * whose endYear equals fromYear is therefore NOT included, while an era whose
+ * startYear equals toYear IS included.
+ *
+ * Valid input range: 1913–present (years from the CPI dataset).
  * Results are returned in chronological order.
  */
 export function getErasForRange(fromYear: number, toYear: number): Era[] {

@@ -54,4 +54,28 @@ describe('getErasForRange', () => {
       expect(eras[i].startYear).toBeGreaterThan(eras[i - 1].startYear)
     }
   })
+  it('returns exactly 1 era when range falls entirely within a single era', () => {
+    // "Great Society & Vietnam" spans 1965–1973. Using fromYear=1965 (exclusive,
+    // so "Postwar Boom" with endYear=1965 is excluded) and toYear=1972 (which is
+    // less than "Stagflation" startYear=1973) should yield exactly 1 era.
+    const eras = getErasForRange(1965, 1972)
+    expect(eras).toHaveLength(1)
+    expect(eras[0].name).toBe('Great Society & Vietnam')
+  })
+  it('excludes era whose endYear equals fromYear (fromYear is exclusive)', () => {
+    // "Postwar Boom" ends at 1965; fromYear 1965 should exclude it.
+    const eras = getErasForRange(1965, 1973)
+    expect(eras.map((e) => e.name)).not.toContain('Postwar Boom')
+  })
+  it('includes era whose startYear equals toYear (toYear is inclusive)', () => {
+    // "Stagflation" starts at 1973; toYear 1973 should include it.
+    const eras = getErasForRange(1965, 1973)
+    expect(eras.map((e) => e.name)).toContain('Stagflation')
+  })
+  it('getErasForRange(1965, 1973) returns exactly "Great Society & Vietnam" and "Stagflation"', () => {
+    const eras = getErasForRange(1965, 1973)
+    expect(eras).toHaveLength(2)
+    expect(eras[0].name).toBe('Great Society & Vietnam')
+    expect(eras[1].name).toBe('Stagflation')
+  })
 })
