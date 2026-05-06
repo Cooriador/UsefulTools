@@ -4,6 +4,7 @@ import { notFound } from 'next/navigation'
 import cpiData from '../../../../data/cpi.json'
 import Calculator from '../../../../components/Calculator'
 import AdUnit from '../../../../components/AdUnit'
+import InflationFromContent from '../../../../components/InflationFromContent'
 import {
   calculateInflation,
   formatCurrency,
@@ -97,6 +98,13 @@ export default async function Page({
       <div className="my-8">
         <AdUnit slot="SLOT_ID_2" />
       </div>
+
+      <InflationFromContent
+        fromYear={fromYear}
+        toYear={toYear}
+        result={result}
+        allYears={ALL_YEARS}
+      />
     </div>
   )
 }
