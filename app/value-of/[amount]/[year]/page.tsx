@@ -5,6 +5,7 @@ import cpiData from '../../../../data/cpi.json'
 import Calculator from '../../../../components/Calculator'
 import AdUnit from '../../../../components/AdUnit'
 import RelatedLinks from '../../../../components/RelatedLinks'
+import ValueOfContent from '../../../../components/ValueOfContent'
 import {
   calculateInflation,
   formatCurrency,
@@ -99,6 +100,15 @@ export default async function Page({
         year={fromYear}
         years={ALL_YEARS}
         amounts={AMOUNTS}
+      />
+
+      <ValueOfContent
+        amount={amount}
+        fromYear={fromYear}
+        maxYear={MAX_YEAR}
+        result={result}
+        allAmounts={AMOUNTS}
+        allYears={ALL_YEARS}
       />
     </div>
   )
