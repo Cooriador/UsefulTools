@@ -85,7 +85,7 @@ export default async function Page({
       </p>
 
       <div className="my-6">
-        <AdUnit slot="SLOT_ID_1" />
+        <AdUnit slot="7165271233" />
       </div>
 
       <Calculator
@@ -96,7 +96,7 @@ export default async function Page({
       />
 
       <div className="my-8">
-        <AdUnit slot="SLOT_ID_2" />
+        <AdUnit slot="9582267152" />
       </div>
 
       <InflationFromContent
