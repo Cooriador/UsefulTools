@@ -57,3 +57,19 @@ export function formatPercent(value: number, decimals = 1): string {
   const sign = value >= 0 ? '+' : ''
   return `${sign}${value.toFixed(decimals)}%`
 }
+
+export function describeInflationCumulative(cumulativePercent: number): string {
+  if (cumulativePercent < 25) return 'prices rose modestly'
+  if (cumulativePercent < 75) return 'prices rose significantly'
+  if (cumulativePercent < 150) return 'prices roughly doubled'
+  if (cumulativePercent < 300) return 'prices roughly tripled'
+  return 'prices increased more than fourfold'
+}
+
+export function describeAnnualRate(avgAnnualRate: number): string {
+  if (avgAnnualRate < 1.5) return 'well below the historical average'
+  if (avgAnnualRate < 2.5) return 'below the historical average'
+  if (avgAnnualRate < 4.0) return 'roughly in line with the historical average'
+  if (avgAnnualRate < 6.0) return 'above the historical average'
+  return 'well above the historical average'
+}
